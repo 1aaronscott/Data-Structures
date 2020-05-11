@@ -11,8 +11,6 @@ return elements in Last In First Out order.
    implementing a Stack?
 """
 
-from linked_list_day_1 import LinkedList
-
 # Part 1. Stack implemented using lists
 
 
@@ -41,20 +39,66 @@ from linked_list_day_1 import LinkedList
 
 # Part 2. Stack implemented using LL
 
+class Node:
+    def __init__(self, value=None, next_node=None):
+        # the value at this linked list node
+        self.value = value
+        # reference to the next node in the list
+        self.next_node = next_node
+
+    def get_value(self):
+        return self.value
+
+    def get_next(self):
+        return self.next_node
+
+    def set_next(self, new_next):
+        # set this node's next_node reference to the passed in node
+        self.next_node = new_next
+
 
 class Stack:
     def __init__(self):
         self.size = 0
-        self.storage = LinkedList()
+        self.head = None
 
     def __len__(self):
+        ''' get the length of the stack '''
         return self.size
 
     def push(self, value):
-        self.storage.add_to_end(value)
-        self.size += 1
+        ''' put a value onto the stack '''
+        # create the new node for the value
+        new_node = Node(value)
+        if not self.head:
+            self.size += 1
+            self.head = new_node
+        else:
+            self.size += 1
+            current = self.head
+            while current.get_next() is not None:
+                current = current.get_next()
+            current.set_next(new_node)
 
     def pop(self):
-        if self.size >= 1:
-            self.size -= 1
-            return self.storage.remove_from_head()
+        ''' remove the value at the top of the stack '''
+        # if the stack is currently empty
+        if self.head == None:
+            return None
+
+        # if the stack is not empty
+        current = self.head
+        old_node = None
+
+        while current.get_next():
+            old_node = current
+            current = current.get_next()
+
+        if old_node:
+            old_node.next_node = None
+        else:
+            self.head = None
+
+        self.size -= 1
+        value = current.get_value()
+        return value
