@@ -1,40 +1,41 @@
 class Node:
-  def __init__(self, value=None, next_node=None):
-    # the value at this linked list node
-    self.value = value
-    # reference to the next node in the list
-    self.next_node = next_node
+    def __init__(self, value=None, next_node=None):
+        # the value at this linked list node
+        self.value = value
+        # reference to the next node in the list
+        self.next_node = next_node
 
-  def get_value(self):
-    return self.value
+    def get_value(self):
+        return self.value
 
-  def get_next(self):
-    return self.next_node
+    def get_next(self):
+        return self.next_node
 
-  def set_next(self, new_next):
-    # set this node's next_node reference to the passed in node
-    self.next_node = new_next
+    def set_next(self, new_next):
+        # set this node's next_node reference to the passed in node
+        self.next_node = new_next
+
 
 class LinkedList:
     def __init__(self):
-        # first node in the list 
+        # first node in the list
         self.head = None
 
     def add_to_end(self, value):
-        # regardless of if the list is empty or not, we need to wrap the value in a Node 
+        # regardless of if the list is empty or not, we need to wrap the value in a Node
         new_node = Node(value)
-        # what if the list is empty? 
+        # what if the list is empty?
         if not self.head:
             self.head = new_node
         # what if the list isn't empty?
         else:
-            # what node do we want to add the new node to? 
-            # the last node in the list 
-            # we can get to the last node in the list by traversing it 
-            current = self.head 
+            # what node do we want to add the new node to?
+            # the last node in the list
+            # we can get to the last node in the list by traversing it
+            current = self.head
             while current.get_next() is not None:
                 current = current.get_next()
-            # we're at the end of the linked list 
+            # we're at the end of the linked list
             current.set_next(new_node)
 
     def remove_from_head(self):
@@ -43,9 +44,31 @@ class LinkedList:
             return None
         # what if it isn't empty?
         else:
-            # we want to return the value at the current head 
+            # we want to return the value at the current head
             value = self.head.get_value()
-            # remove the value at the head 
-            # update self.head 
+            # remove the value at the head
+            # update self.head
             self.head = self.head.get_next()
             return value
+
+    def remove_from_end(self):
+        current = self.head
+        # if there are no items in the list
+        if not current:
+            return None
+        # if there are items in the list
+        else:
+            # move through the list until we get to the last node
+            old = None
+            while current.get_next() is not None:
+                old = current
+                current = current.get_next()
+        # Now we're at the last two nodes, point old to None and
+        # return value of last node (ie current)
+        # If there was only ever one node in the list, we return
+        # current and set the list to be empty
+        if old is not None:
+            old.next_node = None
+        else:
+            self.head = None
+        return current.get_value()
