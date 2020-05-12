@@ -27,9 +27,11 @@ class Array_Stack:
         self.top = 0
 
     def __len__(self):
+        ''' size of the stack '''
         return self.top
 
     def push(self, value):
+        ''' put things onto the stack '''
         # if there's no more space in the array
         if self.top >= self.maxSize:
             return None
@@ -39,6 +41,7 @@ class Array_Stack:
         return
 
     def pop(self):
+        ''' remove items from the stack '''
         # if the stack is empty already
         if self.top <= 0:
             return None
@@ -58,14 +61,17 @@ class Stack:
         self.storage = LinkedList()
 
     def __len__(self):
+        ''' get stack size '''
         return self.size
 
     def pop(self):
+        ''' put items onto the stack '''
         if self.storage.head:
             self.size -= 1
             return self.storage.remove_from_end()
 
     def push(self, value):
+        ''' remove items from the stack '''
         self.size += 1
         self.storage.add_to_end(value)
 

@@ -29,8 +29,8 @@ class Queue:
         self.head = 0
         self.tail = 0
 
-    # Adding elements
     def enqueue(self, value):
+        ''' adding to the queue '''
         # Checking if the queue is full
         if self.size() >= self.maxSize:
             return None
@@ -38,8 +38,8 @@ class Queue:
         self.tail += 1
         return True
 
-    # Deleting elements
     def dequeue(self):
+        ''' removing items from queue '''
         # Checking if the queue is empty
         if self.size() <= 0:
             self.resetQueue()
@@ -55,8 +55,8 @@ class Queue:
     def size(self):
         return self.tail - self.head
 
-    # Reset queue
     def resetQueue(self):
+        ''' reset the queue '''
         self.tail = 0
         self.head = 0
         self.queue = list()
@@ -74,10 +74,12 @@ class LL_Queue:
         return self.size
 
     def enqueue(self, value):
+        ''' adding to the queue '''
         self.size += 1
         self.storage.add_to_end(value)
 
     def dequeue(self):
+        ''' removing from the queue '''
         if self.storage.head:
             self.size -= 1
             return self.storage.remove_from_head()
