@@ -64,22 +64,23 @@ class BinarySearchTree:
         else:
             return self.value
 
-    # Call the function `fn` on the value of each node
-
     def for_each(self, fn):
-        if self.left is None:
-            if self.right is None:
-                return fn(self.value)
-            else:
-                self.right.for_each(fn)
-        else:
+        ''' Call the function `fn` on the value of each node '''
+        # run the function on the current node
+        fn(self.value)
+        # if there's a right node, run the function on it
+        # this will take care of all rights
+        if self.right:
+            self.right.for_each(fn)
+        # similarly for any left nodes
+        if self.left:
             self.left.for_each(fn)
-        return fn(self.value)
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
+
     def in_order_print(self, node):
         pass
 
