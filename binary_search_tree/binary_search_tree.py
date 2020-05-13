@@ -22,7 +22,9 @@ class BinarySearchTree:
     def insert(self, value):
         ''' Insert the given value into the tree '''
         # if value to insert is greater than current node, go right
-        if self.value < value:
+        # in a prior cohort's video the instructor said put dupe values
+        # on the right so using a <= here
+        if self.value <= value:
             # is there is no right node, make one
             if self.right is None:
                 self.right = BinarySearchTree(value)
@@ -38,7 +40,6 @@ class BinarySearchTree:
 
     # Return True if the tree contains the value
     # False if it does not
-
     def contains(self, target):
         ''' Traverses the tree to find the input target variable '''
         if self.value == target:
@@ -78,20 +79,25 @@ class BinarySearchTree:
 
     # Part 2 -----------------------
 
-    # Print all the values in order from low to high
-    # Hint:  Use a recursive, depth first traversal
-
     def in_order_print(self, node):
-        pass
+        ''' Print all the values in order from low to high
+        Hint:  Use a recursive, depth first traversal '''
+        if node is None:
+            return None
+        print(node.value)
+        if self.left:
+            self.left.in_order_print(node.left)
+        if self.right:
+            self.right.in_order_print(node.right)
 
-    # Print the value of every node, starting with the given node,
-    # in an iterative breadth first traversal
     def bft_print(self, node):
+        ''' Print the value of every node, starting with the given node,
+        in an iterative breadth first traversal '''
         pass
 
-    # Print the value of every node, starting with the given node,
-    # in an iterative depth first traversal
     def dft_print(self, node):
+        ''' Print the value of every node, starting with the given node,
+        in an iterative depth first traversal '''
         pass
 
     # Stretch Goals -------------------------
