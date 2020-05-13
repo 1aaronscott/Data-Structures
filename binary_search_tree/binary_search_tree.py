@@ -9,26 +9,63 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
-class BSTNode:
+
+
+class BinarySearchTree:
+    ''' implement a bst '''
+
     def __init__(self, value):
-        self.value = value
+        self.value = value  # root node created when object instantiated
         self.left = None
         self.right = None
 
-    # Insert the given value into the tree
     def insert(self, value):
-        pass
+        ''' Insert the given value into the tree '''
+        # if value to insert is greater than current node, go right
+        if self.value < value:
+            # is there is no right node, make one
+            if self.right is None:
+                self.right = BinarySearchTree(value)
+            # otherwise treat the node as the start of a new tree
+            else:
+                self.right.insert(value)
+        # reverse of the "go right" logic above
+        if self.value > value:
+            if self.left is None:
+                self.left = BinarySearchTree(value)
+            else:
+                self.left.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
-    def contains(self, target):
-        pass
 
-    # Return the maximum value found in the tree
+    def contains(self, target):
+        ''' Traverses the tree to find the input target variable '''
+        if self.value == target:
+            return True
+        # target is larger the current node, go right
+        if self.value < target:
+            if self.right is None:  # but there is no right so the target isn't here
+                return False
+            else:  # go right and make it the current node
+                return self.right.contains(target)
+        else:  # reverse of the "go right" logic above
+            if self.left is None:
+                return False
+            else:
+                return self.left.contains(target)
+
     def get_max(self):
-        pass
+        ''' Return the maximum value found in the tree '''
+        # does root have a right node? n=root is max, y=right is current
+        # current is new root so recurse
+        if self.right:
+            return self.right.get_max()
+        else:
+            return self.value
 
     # Call the function `fn` on the value of each node
+
     def for_each(self, fn):
         pass
 
