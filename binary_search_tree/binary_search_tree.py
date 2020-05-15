@@ -10,6 +10,9 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 
+from queue import Queue
+from stack import Stack
+
 
 class BinarySearchTree:
     ''' implement a bst '''
@@ -107,12 +110,37 @@ class BinarySearchTree:
     def bft_print(self, node):
         ''' Print the value of every node, starting with the given node,
         in an iterative breadth first traversal '''
-        pass
+        # create a queue object and initialize it
+        queue = Queue()
+        queue.enqueue(node)
+        # loop until the queue is empty
+        while queue.size:
+            # get the first in value and print
+            x = queue.dequeue()
+            print(x.value)
+            # add the left and right children to the queue
+            if x.left:
+                queue.enqueue(x.left)
+            if x.right:
+                queue.enqueue(x.right)
 
     def dft_print(self, node):
         ''' Print the value of every node, starting with the given node,
         in an iterative depth first traversal '''
-        pass
+        # create a stack object and initialize it
+        stack = Stack()
+        stack.push(node)
+        # loop until the stack is empty
+        while stack.size:
+            # get the top value from the stack and print
+            # pop from stack must be before pushes below to prevent inf loop
+            x = stack.pop()
+            print(x.value)
+            # add the left and right children to the stack
+            if x.left:
+                stack.push(x.left)
+            if x.right:
+                stack.push(x.right)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -135,3 +163,5 @@ class BinarySearchTree:
 # bst.insert(4)
 # bst.insert(2)
 # bst.in_order_print(bst)
+# bst.bft_print(bst)
+# bst.dft_print(bst)
